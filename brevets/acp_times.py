@@ -12,6 +12,14 @@ import arrow
 #  same arguments.
 #
 
+# km: hrs
+times_dict = { 
+   200: 13.5,
+   300: 20,
+   400: 27,
+   600: 40,
+   1000: 75 
+}
 
 def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     """
@@ -29,6 +37,7 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
     
     if control_dist_km == 0: 
        return brevet_start_time
+    
     if control_dist_km > brevet_dist_km:
        max_distance = True
        
@@ -75,18 +84,7 @@ def close_time(control_dist_km, brevet_dist_km, brevet_start_time):
        return brevet_start_time.shift(hours=+1)
     
     if control_dist_km >= brevet_dist_km:
-       shift_time = 0
-       if brevet_dist_km == 200:
-          shift_time = 13.5
-       elif brevet_dist_km == 300:
-          shift_time = 20
-       elif brevet_dist_km == 400:
-          shift_time = 27
-       elif brevet_dist_km == 600:
-          shift_time = 40
-       else:
-          shift_time = 75
-       
+       shift_time = times_dict[brevet_dist_km]
        return brevet_start_time.shift(hours=+shift_time)
     
     time = 0
