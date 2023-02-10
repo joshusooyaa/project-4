@@ -12,6 +12,8 @@ import config
 
 import logging
 
+from datetime import timedelta
+
 ###
 # Globals
 ###
@@ -51,14 +53,27 @@ def _calc_times():
     """
     app.logger.debug("Got a JSON request")
     km = request.args.get('km', 999, type=float)
+    brev = request.args.get('brev', type=float) # No need for a fallback since there's always a value for brev
+    start_time = request.args.get('bd', type=str)
+    # ot = request.args.get('ot', start_time, type=float)    
+    
+    
+    time = timedelta(hours=1.5)
+    time2 = arrow.now()
+    time2 = time + time2
+    
+    app.logger.debug("time2={}".format(time2))
     app.logger.debug("km={}".format(km))
     app.logger.debug("request.args: {}".format(request.args))
     # FIXME!
     # Right now, only the current time is passed as the start time
     # and control distance is fixed to 200
     # You should get these from the webpage!
-    open_time = acp_times.open_time(km, 200, arrow.now().isoformat).format('YYYY-MM-DDTHH:mm')
-    close_time = acp_times.close_time(km, 200, arrow.now().isoformat).format('YYYY-MM-DDTHH:mm')
+    app.logger.debug("test")
+    open_time = acp_times.open_time(km, brev, arrow.get(start_time)).format('YYYY-MM-DDTHH:mm')
+    close_time = acp_times.close_time(km, brev, arrow.get(start_time)).format('YYYY-MM-DDTHH:mm')
+    app.logger.debug("test2")
+    app.logger.debug("open_time={}".format(open_time))
     result = {"open": open_time, "close": close_time}
     return flask.jsonify(result=result)
 
