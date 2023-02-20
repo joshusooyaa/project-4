@@ -34,7 +34,6 @@ def open_time(control_dist_km, brevet_dist_km, brevet_start_time):
        This will be in the same time zone as the brevet start time.
     """
     max_distance = False
-    use_100 = False
     
     if control_dist_km == 0: 
        return brevet_start_time
