@@ -12,7 +12,7 @@
 2. If the distance is greater than the brevet distance then it'll make sure to return a fixed value for that brevet_distance. 
 3. If the distance is <= 60 then the time is calculated by distance/20 + 1 and that is used to shift the time. 
 
-All time is in YYYY/MM/DDTHH:MM format and must stay in this format. Both functions ensure that this format is kept by using arrow time and using the shift function the adjust the time. `brevet_start_time` is what gets shifted - as we are calculating the time based off of the beginning of the race each time. 
+All time is in YYYY-MM-DDTHH:MM format and must stay in this format. Both functions ensure that this format is kept by using arrow time and using the shift function the adjust the time. `brevet_start_time` is what gets shifted - as we are calculating the time based off of the beginning of the race each time. 
 
 ## `flask_brevets.py`
 `flask_brevets.py` is updated to make sure the correct control distance and time is passed in so `acp_times.py` can calculate the correct times. For `flask_brevets.py` to pass a control distance, start time and brevet distance, it needs to get the information from the webpage (specifically from the JSON HTTP request) - so it uses request.args.get(). These arguments are passed in the Javascript from the getJSON request in `calc.html`. Using these arguments, they are then saved as variables in `flask_brevets.py` and are passed to the functions in `acp_times.py` to get the correct time calculations. Once this is done, the open and close times are saved and passed back to the Javascript in `calc.html` as a JSON file. 
