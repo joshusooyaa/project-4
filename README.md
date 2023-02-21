@@ -23,6 +23,10 @@ All time is in YYYY-MM-DDTHH:MM format and must stay in this format. Both functi
 Once the `flask_brevets.py` sends a response back (sending the JSON back) it unpacks the information (open and close time) and updates the HTML with the open and close time that. 
 
 -----
-Josh Sawyer\
+## Authors
+
+Michal Young, Ram Durairajan. Updated by Ali Hassani.
+
+Adjusted by Josh Sawyer\
 jsawyer2@uoregon.edu
 
